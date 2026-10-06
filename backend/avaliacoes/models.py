@@ -13,10 +13,15 @@ class Avaliacao(models.Model):
         (RESPONDIDA, 'Respondida'),
     ]
 
-   
+    # A ForeignKey fica aqui, na Avaliacao, e nao no Aluno, porque um mesmo
+    # aluno faz varias avaliacoes ao longo do semestre. Em uma relacao 1:N a
+    # referencia mora no lado que se repete: cada linha de Avaliacao guarda
+    # o aluno dela, e o Aluno continua unico na tabela dele.
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='avaliacoes')
 
-    
+        # Mesma logica do lado da Disciplina: uma disciplina recebe varias
+    # avaliacoes, uma de cada aluno que a cursa. Por isso a referencia fica
+    # na Avaliacao, que e o lado "muitos" da relacao.
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='avaliacoes')
 
     nota = models.IntegerField(

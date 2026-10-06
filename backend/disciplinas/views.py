@@ -1,3 +1,8 @@
-from django.shortcuts import render
+﻿from django.http import JsonResponse
 
-# Create your views here.
+from .models import Disciplina
+
+
+def listar_disciplinas(request):
+    disciplinas = Disciplina.objects.all()
+    return JsonResponse(list(disciplinas.values()), safe=False)

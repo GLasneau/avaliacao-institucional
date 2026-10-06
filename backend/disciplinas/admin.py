@@ -1,3 +1,9 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 
-# Register your models here.
+from .models import Disciplina
+
+
+@admin.register(Disciplina)
+class DisciplinaAdmin(admin.ModelAdmin):
+    list_display = ("nome", "codigo", "professor", "periodo")
+    search_fields = ("nome", "codigo")
